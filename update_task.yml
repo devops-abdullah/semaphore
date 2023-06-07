@@ -1,5 +1,5 @@
 ---
-- host: all
+- hosts: all
   becomes: true
   tasks:
   - name: Update Package on Debian Machine
