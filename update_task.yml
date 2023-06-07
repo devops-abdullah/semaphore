@@ -3,4 +3,4 @@
   become: yes
   tasks:
     - name: Update Package on Debian Machine
-      command: sudo apt-get update
+      command: yum repolist
