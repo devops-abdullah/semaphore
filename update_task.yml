@@ -1,6 +1,6 @@
 ---
-- hosts: all
-  becomes: true
-  tasks:
+hosts: all
+becomes: true
+tasks:
   - name: Update Package on Debian Machine
     command: sudo apt-get update
