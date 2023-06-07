@@ -1,0 +1,2 @@
+# semaphore
+Semaphore Ansible UI
