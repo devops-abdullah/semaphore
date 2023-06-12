@@ -15,7 +15,7 @@
        
     - name: copy Service File
       copy: 
-       src: /etc/systemd/system/node_exporter.service
+       src: ./node_exporter.service
        dest: /etc/systemd/system/
        owner: root
        force: yes
