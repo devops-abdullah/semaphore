@@ -25,6 +25,10 @@
         name: node_exporter
         state: present
         create_home: no
+    
+    - name: Just force systemd to reread configs (2.4 and above)
+      ansible.builtin.systemd:
+       daemon_reload: yes
 
     - name: Restart service "node_exporter"
       #shell: systemctl start docke
