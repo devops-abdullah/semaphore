@@ -11,7 +11,7 @@
        owner: root
        mode: a+x
        force: yes
-      register: out
+      # register: out
 
     # - name: "get the stats of the '/etc' directory"
     #   stat:
