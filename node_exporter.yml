@@ -1,8 +1,5 @@
 - 
-  hosts: all 
-  # connection: "local"
-  # gather_facts: false
-  # gather_facts: no
+  hosts: all
   become: yes
   tasks:
     
