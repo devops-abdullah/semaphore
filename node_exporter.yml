@@ -3,42 +3,47 @@
   become: yes
   tasks:
     
-    - name: copy NODE_Exporter Binary File
-      copy: 
-       src: ./nodeBinary/node_exporter
-       dest: /usr/local/bin/
-       owner: root
-       mode: a+x
-       force: yes
+    # - name: copy NODE_Exporter Binary File
+    #   copy: 
+    #    src: ./nodeBinary/node_exporter
+    #    dest: /usr/local/bin/
+    #    owner: root
+    #    mode: a+x
+    #    force: yes
+    #   register: out
+
+    - name: "get the stats of the '/etc' directory"
+      stat:
+        path: "/usr/local/bin"
       register: out
 
     - name: "output the 'out' variable"
       debug:
         msg: "{{ out }}"
 
-    - name: copy Service File
-      copy: 
-       src: ./node_exporter.service
-       dest: /etc/systemd/system/
-       owner: root
-       force: yes
+    # - name: copy Service File
+    #   copy: 
+    #    src: ./node_exporter.service
+    #    dest: /etc/systemd/system/
+    #    owner: root
+    #    force: yes
 
-    - name: "Create user accounts and add users to groups"
-      user:
-        name: node_exporter
-        state: present
-        create_home: no
+    # - name: "Create user accounts and add users to groups"
+    #   user:
+    #     name: node_exporter
+    #     state: present
+    #     create_home: no
     
-    - name: Just force systemd to reread configs (2.4 and above)
-      ansible.builtin.systemd:
-       daemon_reload: yes
+    # - name: Just force systemd to reread configs (2.4 and above)
+    #   ansible.builtin.systemd:
+    #    daemon_reload: yes
 
-    - name: Restart service "node_exporter"
-      #shell: systemctl start docke
-      service: 
-       name: "{{ item }}"
-       state: restarted 
-       enabled: yes
-      with_items:
-       - node_exporter
-      ignore_errors: yes
+    # - name: Restart service "node_exporter"
+    #   #shell: systemctl start docke
+    #   service: 
+    #    name: "{{ item }}"
+    #    state: restarted 
+    #    enabled: yes
+    #   with_items:
+    #    - node_exporter
+    #   ignore_errors: yes
