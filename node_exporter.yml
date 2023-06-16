@@ -10,7 +10,12 @@
        owner: root
        mode: a+x
        force: yes
-       
+      register: out
+
+    - name: "output the 'out' variable"
+      debug:
+        msg: "{{ out }}"
+
     - name: copy Service File
       copy: 
        src: ./node_exporter.service
