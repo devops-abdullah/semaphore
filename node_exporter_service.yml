@@ -1,0 +1,13 @@
+- 
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Restart service "node_exporter"
+      service: 
+       name: "{{ item }}"
+       state: restarted 
+       enabled: yes
+      with_items:
+       - node_exporter
+      ignore_errors: yes
