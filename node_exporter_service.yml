@@ -7,7 +7,7 @@
     - name: Restart service "node_exporter"
       service: 
        name: "{{ item }}"
-       state: restarted 
+       state: started 
        enabled: yes
       with_items:
        - node_exporter
