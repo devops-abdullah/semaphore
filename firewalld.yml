@@ -1,0 +1,14 @@
+- 
+  hosts: all
+  become: yes
+  ignore_unreachable: true
+  tasks:
+
+    - name: Firewalld Should be Active
+      service: 
+       name: "{{ item }}"
+       state: started 
+       enabled: yes
+      with_items:
+       - firewalld
+      ignore_errors: yes
