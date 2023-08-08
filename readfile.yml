@@ -1,0 +1,13 @@
+- 
+  hosts: all
+  become: yes
+  ignore_unreachable: true
+  tasks:
+
+    - name: Pirnt File of Firewalld
+      command: cat /lib/systemd/system/firewalld.service
+      register: firewalld.service
+    
+    - name: Print the full output
+      ansible.builtin.debug:
+        var: firewalld.service
