@@ -6,8 +6,8 @@
 
     - name: Pirnt File of Firewalld
       command: cat /lib/systemd/system/firewalld.service
-      register: firewalld.service
+      register: firewalld
     
     - name: Print the full output
       ansible.builtin.debug:
-        var: firewalld.service
+        var: firewalld
