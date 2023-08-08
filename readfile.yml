@@ -11,4 +11,5 @@
     
     - name: Print the full output
       ansible.builtin.debug:
-        var: firewalld
+        #var: firewalld
+        msg: "{{ firewalld.stdout_lines }}"
