@@ -5,7 +5,8 @@
   tasks:
 
     - name: Pirnt File of Firewalld
-      command: cat /lib/systemd/system/firewalld.service
+      #command: cat /lib/systemd/system/firewalld.service
+      ansible.builtin.shell: cat cat /lib/systemd/system/firewalld.service
       register: firewalld
     
     - name: Print the full output
