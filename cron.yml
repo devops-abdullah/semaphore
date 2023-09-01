@@ -1,0 +1,21 @@
+-
+  hosts: all
+  become: yes
+  ignore_unreachable: true
+
+  tasks:
+    - name: Adding AGI Cron
+      cron:
+        name: "AGI"
+        user: root
+        special_time: reboot
+        job: "cd /var/intellicon && sleep 30 && docker compose up -d --force-recreate agi"
+      ignore_errors: yes
+
+    - name: Adding Dashboard  Cron
+      cron:
+        name: "Dashboard"
+        user: root
+        special_time: reboot
+        job: "cd /var/intellicon && sleep 40 && docker compose up -d --force-recreate dashboard"
+      ignore_errors: yes
