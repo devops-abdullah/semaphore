@@ -11,6 +11,7 @@
         # user: root
         special_time: reboot
         job: "cd /var/intellicon && sleep 30 && docker compose up -d --force-recreate agi"
+        state: absent
       ignore_errors: yes
 
     - name: Adding Dashboard  Cron
@@ -19,4 +20,5 @@
         # user: root
         special_time: reboot
         job: "cd /var/intellicon && sleep 40 && docker compose up -d --force-recreate dashboard"
+        state: absent
       ignore_errors: yes
