@@ -1,0 +1,13 @@
+ACTION=="add", KERNEL=="sd*[!0-9]", GOTO="disable_usb"
+GOTO="end"
+
+LABEL="disable_usb"
+RUN+="/bin/sh -c 'echo 1 >/sys$DEVPATH/remove'"
+
+LABEL="end"
+
+{# 
+  ACTION=="add", SUBSYSTEMS=="usb", RUN+="/bin/sh -c 'echo 0 >/sys%p/authorized'"
+  
+  
+  #}
