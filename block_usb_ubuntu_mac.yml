@@ -1,0 +1,31 @@
+---
+- name: Disable USB ports on Ubuntu and macOS
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disable USB ports on Ubuntu
+      block:
+        - name: Create udev rule to block USB
+          template:
+            src: usb_block_rule.j2
+            dest: /etc/udev/rules.d/99-usb-block.rules
+          when: ansible_distribution == 'Ubuntu'
+
+        - name: Reload udev rules
+          command: udevadm control --reload-rules && udevadm trigger
+          when: ansible_distribution == 'Ubuntu'
+
+    - name: Disable USB ports on macOS
+      block:
+        - name: Disable USB ports using spctl
+          command: spctl --master-disable
+          when: ansible_system == 'Darwin'
+
+        - name: Disable USB ports using system_profiler
+          command: system_profiler SPUSBDataType | grep -q "No data found"
+          changed_when: false
+          when: ansible_system == 'Darwin'
+
+        - name: Restart the SystemUIServer
+          command: pkill -HUP SystemUIServer
+          when: ansible_system == 'Darwin'
