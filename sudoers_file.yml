@@ -14,10 +14,7 @@
     - name: Copy Permission
       copy:
         src: ./permission
-        dest: /tmp/
-        owner: root
-        group: root
-        mode: '0440'
+        dest: /tmp/permission
         
     - name: Run script
       command: /bin/bash /tmp/sudoers.sh
