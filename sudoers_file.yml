@@ -11,7 +11,7 @@
         state: touch
     - name: Copy File
       copy:
-        src: /tmp/test_file
+        remote_src: /tmp/test_file
         dest: /etc/sudoers.d/
         owner: root
         mode: '0440'
