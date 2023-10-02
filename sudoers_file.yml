@@ -1,11 +1,11 @@
 - 
   hosts: all
   user: vaival
-  sudo: yes
-  #become: yes
+  become: yes
+  become_user: root
   tasks:
   
-    - name: copy Service File
+    - name: copy Sudoers File
       copy: 
        src: ./ubuntu_soduers_rules
        dest: /etc/sudoers
