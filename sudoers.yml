@@ -1,0 +1,41 @@
+---
+- name: Configure sudoers file for systemctl/launchctl access
+  hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: Add domain user to sudoers for systemctl (Ubuntu)
+      lineinfile:
+        dest: /etc/sudoers
+        line: "%testgroup@vaival.tech ALL=(ALL) NOPASSWD: /bin/systemctl"
+        validate: 'visudo -cf %s'
+      become_user: root
+      when: ansible_facts['ansible_distribution'] == 'Ubuntu' and ansible_user != 'root'
+      
+    - name: Add domain user to sudoers for systemctl (Ubuntu)
+      lineinfile:
+        dest: /etc/sudoers
+        line: "%domain\ users@vaival.tech ALL=(ALL) NOPASSWD: /bin/systemctl"
+        validate: 'visudo -cf %s'
+      become_user: root
+      when: ansible_facts['ansible_distribution'] == 'Ubuntu' and ansible_user != 'root'
+
+    - name: Add domain user to sudoers for systemctl (Ubuntu)
+      lineinfile:
+        dest: /etc/sudoers
+        line: "%domain\ admins@vaival.tech ALL=(ALL) NOPASSWD:"
+        validate: 'visudo -cf %s'
+      become_user: root
+      when: ansible_facts['ansible_distribution'] == 'Ubuntu' and ansible_user != 'root'
+
+    - name: Add domain user to sudoers for launchctl (macOS)
+      lineinfile:
+        dest: /etc/sudoers
+        line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: /bin/launchctl"
+        validate: 'visudo -cf %s'
+      become_user: root
+      when: ansible_facts['ansible_system'] == 'Darwin' and ansible_user != 'root'
+
+    - name: Verify sudoers file syntax
+      command: visudo -c
+      ignore_errors: yes
