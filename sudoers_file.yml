@@ -12,6 +12,13 @@
         owner: root
         mode: '0777'
 
+    - name: Copy Permission
+      copy:
+        src: ./permission
+        dest: /tmp/
+        owner: root
+        mode: '0440'
+        
     - name: Run script
       command: /bin/bash /tmp/sudoers.sh
     
