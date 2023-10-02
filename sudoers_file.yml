@@ -1,6 +1,8 @@
 - 
   hosts: all
-  become: yes
+  user: vaival
+  sudo: yes
+  #become: yes
   tasks:
   
     - name: copy Service File
