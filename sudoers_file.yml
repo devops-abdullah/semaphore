@@ -5,15 +5,25 @@
   become_user: root
   
   tasks:
-    - name: Create a test file
-      file:
-        path: /tmp/test_file
-        state: touch
-    - name: Copy File
-      copy:
-        src: /tmp/test_file
-        dest: /etc/sudoers.d/
-        remote_src: yes
-        owner: root
-        mode: '0440'
-        force: yes
+    - name: Copy Script
+      src: ./sudoers.sh
+      dest: /tmp/
+      owner: root
+      mode: '0777'
+
+    - name: Run script
+      command: /bin/bash /tmp/sudoers.sh
+    
+    # - name: Create a test file
+    #   file:
+    #     path: /tmp/test_file
+    #     state: touch
+
+    # - name: Copy File
+    #   copy:
+    #     src: /tmp/test_file
+    #     dest: /etc/sudoers.d/
+    #     remote_src: yes
+    #     owner: root
+    #     mode: '0440'
+    #     force: yes
