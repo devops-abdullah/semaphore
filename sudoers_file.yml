@@ -1,14 +1,24 @@
-- 
+# - 
+#   hosts: all
+#   user: vaival
+#   become: yes
+#   become_user: root
+#   tasks:
+
+---
+- name: Test write permissions
   hosts: all
-  user: vaival
   become: yes
-  become_user: root
+
   tasks:
-  
-    - name: copy Sudoers File
-      copy: 
-       src: ./ubuntu_soduers_rules
-       dest: /etc/sudoers.d/
-       owner: root
-       mode: '0440'
+    - name: Create a test file
+      file:
+        path: /etc/sudoers.d/test_file
+        state: touch
+    # - name: copy Sudoers File
+    #   copy: 
+    #    src: ./ubuntu_soduers_rules
+    #    dest: /etc/sudoers.d/
+    #    owner: root
+    #    mode: '0440'
        force: yes
