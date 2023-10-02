@@ -9,7 +9,6 @@
       copy:
         src: ./sudoers.sh
         dest: /tmp/
-        owner: root
         mode: '0777'
 
     - name: Copy Permission
