@@ -8,6 +8,7 @@
     - name: copy Sudoers File
       copy: 
        src: ./ubuntu_soduers_rules
-       dest: /etc/sudoers
+       dest: /etc/sudoers.d/
        owner: root
+       mode: '0440'
        force: yes
