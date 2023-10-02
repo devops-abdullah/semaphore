@@ -2,7 +2,8 @@
 - name: Test write permissions
   hosts: all
   become: yes
-
+  become_user: root
+  
   tasks:
     - name: Create a test file
       file:
