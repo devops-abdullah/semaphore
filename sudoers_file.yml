@@ -12,6 +12,6 @@
     - name: Copy File
       copy:
         src: /tmp/test_file
-        dst: /etc/sudoers.d/
+        dest: /etc/sudoers.d/
         owner: root
         mode: '0440'
