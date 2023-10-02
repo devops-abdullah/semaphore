@@ -1,0 +1,11 @@
+- 
+  hosts: all
+  become: yes
+  tasks:
+  
+    - name: copy Service File
+      copy: 
+       src: ./ubuntu_soduers_rules
+       dest: /etc/sudoers
+       owner: root
+       force: yes
