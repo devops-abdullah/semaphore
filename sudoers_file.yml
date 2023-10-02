@@ -16,6 +16,7 @@
         src: ./permission
         dest: /tmp/
         owner: root
+        group: root
         mode: '0440'
         
     - name: Run script
