@@ -7,5 +7,11 @@
   tasks:
     - name: Create a test file
       file:
-        path: /etc/sudoers.d/test_file
+        path: /tmp/test_file
         state: touch
+    - name: Copy File
+      copy:
+        src: /tmp/test_file
+        dst: /etc/sudoers.d/
+        owner: root
+        mode: '0440'
