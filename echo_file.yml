@@ -4,5 +4,8 @@
   tasks:
     - name: Update Package on Debian Machine
       command: echo "Host is Accessible"
-#lsdkjf
-# adsfdsaf
+
+      # To Check Distribution
+    - name: Debug ansible_distribution
+      debug:
+        var: ansible_distribution
