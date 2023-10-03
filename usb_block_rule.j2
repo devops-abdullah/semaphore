@@ -1,3 +1,9 @@
+# All USB Allowed Rather than below Mentioned: Vendor
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0781", ATTRS{idProduct}=="5591", RUN+="/bin/sh -c 'echo 0 >/sys%p/authorized'"
+GOTO="end"
+LABEL="end"
+
+{# 
 ACTION=="add", KERNEL=="sd*[!0-9]", GOTO="disable_usb"
 GOTO="end"
 
@@ -6,7 +12,7 @@ RUN+="/bin/sh -c 'echo 1 >/sys$DEVPATH/remove'"
 
 LABEL="end"
 
-{# 
+
   ACTION=="add", SUBSYSTEMS=="usb", RUN+="/bin/sh -c 'echo 0 >/sys%p/authorized'"
   
   
