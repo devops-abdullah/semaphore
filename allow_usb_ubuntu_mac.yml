@@ -1,0 +1,37 @@
+---
+- name: Disable USB ports on Ubuntu and macOS
+  hosts: all
+  become: yes
+  become_user: root
+  # vars:
+  #   anisble_becomes_pass: 12345
+  tasks:
+    - name: Disable USB ports on Ubuntu
+      block:
+        - name: Create udev rule to block USB
+          command: sudo rm -rf /etc/udev/rules.d/99-usb-block.rules
+          when: ansible_distribution == 'Ubuntu'
+
+        - name: Reload udev rules
+          command: udevadm control --reload-rules && udevadm trigger
+          when: ansible_distribution == 'Ubuntu'
+
+    - name: Disable USB ports on Centos
+      block:
+        - name: Create udev rule to block USB
+          command: sudo rm -rf /etc/udev/rules.d/99-usb-block.rules
+          when: ansible_distribution == 'CentOS'
+
+        - name: Reload udev rules
+          command: udevadm control --reload-rules && udevadm trigger
+          when: ansible_distribution == 'CentOS'
+
+    - name: Disable USB ports on Debian
+      block:
+        - name: Create udev rule to block USB
+          command: sudo rm -rf /etc/udev/rules.d/99-usb-block.rules
+          when: ansible_distribution == 'Debian'
+
+        - name: Reload udev rules
+          command: udevadm control --reload-rules && udevadm trigger
+          when: ansible_distribution == 'Debian'
