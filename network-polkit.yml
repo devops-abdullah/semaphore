@@ -3,7 +3,7 @@
   become: yes
   become_user: root
   vars:
-    ansible_become_pass: 123
+    ansible_become_pass: 12345
 
   tasks:
     - name: Configure Network Policy to Manage Network from GUI without any Password
