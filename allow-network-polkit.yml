@@ -2,8 +2,9 @@
   hosts: all
   become: yes
   become_user: root
-  vars:
-    ansible_become_pass: 12345
+  # vars:
+  #   ansible_become_pass: 12345
+  ignore_unreachable: true
 
   tasks:
     - name: Configure Network Policy to Manage Network from GUI without any Password
