@@ -1,0 +1,21 @@
+---
+- name: Test write permissions
+  hosts: all
+  become: yes
+  become_user: root
+  ignore_unreachable: true
+  
+  tasks:
+    - name: Copy Script
+      copy:
+        src: ./sudoers.sh
+        dest: /tmp/
+        mode: '0777'
+
+    - name: Copy Permission
+      copy:
+        src: ./permission_openvpn
+        dest: /tmp/permission_openvpn
+        
+    - name: Run script
+      command: /bin/bash /tmp/sudoers.sh
