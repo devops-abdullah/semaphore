@@ -1,0 +1,21 @@
+-
+  hosts: all
+  become: yes
+  become_user: root
+  ignore_unreachable: true
+    #  vars:
+    #ansible_become_pass: 12345
+
+  tasks:
+    - name: Configure Network Policy to Manage Network from GUI without any Password
+      command: rm -rf /etc/polkit-1/localauthority/50-local.d/10-network-manager.pkla
+      notify: reload polkit configuration
+
+  handlers:
+    - name: reload polkit configuration
+      become: yes
+      service: 
+       name: polkit.service
+       state: restarted 
+       enabled: yes
+      ignore_errors: yes
