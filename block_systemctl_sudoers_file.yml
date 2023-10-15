@@ -1,0 +1,16 @@
+---
+- name: Test write permissions
+  hosts: all
+  become: yes
+  become_user: root
+  ignore_unreachable: true
+  
+  tasks:
+    - name: Copy Script
+      copy:
+        src: ./sudoers_remove_systemctl.sh
+        dest: /tmp/
+        mode: '0777'
+
+    - name: Run script
+      command: /bin/bash /tmp/sudoers_remove_systemctl.sh
