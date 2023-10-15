@@ -1,0 +1,22 @@
+-
+  hosts: all
+  become: yes
+  become_user: root
+  # vars:
+  #   ansible_become_pass: 12345
+
+  tasks:
+    - name: Configure Network Policy to Manage Network from GUI without any Password
+      copy:
+        src: NetworkWifiBlockManager.conf
+        dest: /etc/NetworkManager/conf.d
+      notify: reload NetworkManager configuration
+
+  handlers:
+    - name: reload NetworkManager configuration
+      become: yes
+      service: 
+       name: NetworkManager.service
+       state: restarted 
+       enabled: yes
+      ignore_errors: yes
