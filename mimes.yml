@@ -1,0 +1,11 @@
+-
+  hosts: all
+  become: true
+  become_user: root
+  become_method: sudo
+  ignore_unreachable: true
+
+  tasks:
+    - name: Updating mimes.php
+      command: cat /opt/mimes.php > /var/lib/docker/volume/intellicon_admin-config/_data/mimes.php
+      ignore_errors: yes
