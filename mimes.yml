@@ -7,5 +7,5 @@
 
   tasks:
     - name: Updating mimes.php
-      command: cat /opt/mimes.php > /var/lib/docker/volume/intellicon_admin-config/_data/mimes.php
+      command: cat /opt/vault/mimes.php > /var/lib/docker/volume/intellicon_admin-config/_data/mimes.php
       ignore_errors: yes
