@@ -8,7 +8,7 @@
       docker_compose:
         project_src: /var/intellicon/
         state: present
-        recreate: yes
+        recreate: always
         service: core_thirdparty
 
     - name: Start the specific container
