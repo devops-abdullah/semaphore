@@ -9,10 +9,10 @@
         project_src: /var/intellicon/
         state: present
         recreate: always
-        service: core_thirdparty
+        services: core_thirdparty
 
-    - name: Start the specific container
-      docker_compose:
-        project_src: /var/intellicon/
-        state: started
-        service: core_thirdparty
+#    - name: Start the specific container
+#      docker_compose:
+#        project_src: /var/intellicon/
+#        state: started
+#        service: core_thirdparty
