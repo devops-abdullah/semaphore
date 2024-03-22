@@ -1,0 +1,18 @@
+---
+- name: Manage Docker Compose for a specific container
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Pull Docker image for the specific container
+      docker_compose:
+        project_src: /var/intellicon/
+        state: present
+        recreate: yes
+        service: core_thirdparty
+
+    - name: Start the specific container
+      docker_compose:
+        project_src: /var/intellicon/
+        state: started
+        service: core_thirdparty
