@@ -6,21 +6,21 @@
 
     - name: Copy Docker Restart Service File
       copy: 
-       src: ./services_check/docker-restart.service
+       src: services_check/docker-restart.service
        dest: /etc/systemd/system/
        owner: root
        force: yes
 
     - name: Copy Docker Restart Timer File
       copy: 
-       src: ./services_check/docker-restart.timer
+       src: services_check/docker-restart.timer
        dest: /etc/systemd/system/
        owner: root
        force: yes
 
     - name: Copy Test Scripts
       copy: 
-       src: ./services_check/scripts/*
+       src: services_check/scripts/*
        dest: /var/local/
        owner: root
        mode: a+x
