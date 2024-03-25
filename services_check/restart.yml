@@ -1,0 +1,40 @@
+- 
+  hosts: all
+  become: yes
+  ignore_unreachable: true
+  tasks:
+
+    - name: Copy Docker Restart Service File
+      copy: 
+       src: ./services_check/docker-restart.service
+       dest: /etc/systemd/system/
+       owner: root
+       force: yes
+
+    - name: Copy Docker Restart Timer File
+      copy: 
+       src: ./services_check/docker-restart.timer
+       dest: /etc/systemd/system/
+       owner: root
+       force: yes
+
+    - name: Copy Test Scripts
+      copy: 
+       src: ./services_check/scripts/*
+       dest: /var/local/
+       owner: root
+       mode: a+x
+       force: yes
+
+    - name: Reload systemd daemon
+      systemd:
+        state: reloaded
+
+    - name: Enabled Docker Restart Timer Service
+      service: 
+       name: "{{ item }}"
+       state: started 
+       enabled: yes
+      with_items:
+       - docker-restart.timer
+      ignore_errors: yes

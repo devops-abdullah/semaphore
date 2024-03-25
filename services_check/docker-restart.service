@@ -1,0 +1,8 @@
+[Unit]
+Description=Docker Restart Service
+
+[Service]
+Type=oneshot
+ExecStart=/var/local/addressbook_check.sh
+ExecStart=/var/local/leads_check.sh
+ExecStart=/var/local/core_thirdparty_check.sh
