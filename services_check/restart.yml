@@ -1,6 +1,7 @@
 - 
   hosts: all
   become: yes
+  become_user: intellicon-admin
   ignore_unreachable: true
   tasks:
 
@@ -20,8 +21,24 @@
 
     - name: Copy Test Scripts
       copy: 
-       src: services_check/scripts/*
-       dest: /var/local/
+       src: services_check/scripts/addressbook_check.sh
+       dest: /var/local/addressbook_check.sh
+       owner: root
+       mode: a+x
+       force: yes
+
+    - name: Copy Test Scripts
+      copy: 
+       src: services_check/scripts/leads_check.sh
+       dest: /var/local/leads_check.sh
+       owner: root
+       mode: a+x
+       force: yes
+
+    - name: Copy Test Scripts
+      copy: 
+       src: services_check/scripts/core_thirdparty.sh
+       dest: /var/local/core_thirdparty.sh
        owner: root
        mode: a+x
        force: yes
