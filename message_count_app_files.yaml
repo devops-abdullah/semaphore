@@ -24,6 +24,8 @@
         update_cache: yes
       become: true
       become_user: root
+      become_method: su
+      become_password: "{{ ansible_become_password }}"
         
     - name: Install sshpass with apt-get
       apt:
@@ -31,6 +33,8 @@
         state: present
       become: true
       become_user: root
+      become_method: su
+      become_password: "{{ ansible_become_password }}"
   
     # - name: Get the primary IP address using hostname and awk
     #   shell: "hostname -I | awk '{print $1}'"
