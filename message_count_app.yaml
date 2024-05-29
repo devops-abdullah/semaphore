@@ -7,6 +7,10 @@
     reg: "{{ reg }}"
     user: "{{ user }}"
     pass: "{{ pass }}"
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_user: "{{ ansible_become_user }}"
+    ansible_become_password: "{{ ansible_become_password }}"
     
   tasks:
     - name: Log in to Docker registry
