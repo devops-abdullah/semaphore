@@ -2,7 +2,6 @@
 - name: Collect Stats
   hosts: all
   become: true
-  become_user: root
   ignore_unreachable: true
   vars:
     remote_server: "{{ lookup('env', 'remote_server') }}"
@@ -11,7 +10,7 @@
     remote_password: "{{ lookup('env', 'remote_password') }}"
     ansible_become: true
     ansible_become_method: sudo
-    # ansible_become_user: "{{ ansible_become_user }}"
+    ansible_become_user: "{{ ansible_become_user }}"
     ansible_become_password: "{{ ansible_become_password }}"
     
   tasks:
@@ -23,18 +22,12 @@
       apt:
         update_cache: yes
       become: true
-      become_user: root
-      become_method: su
-      # become_password: "{{ ansible_become_password }}"
         
     - name: Install sshpass with apt-get
       apt:
         name: sshpass
         state: present
       become: true
-      become_user: root
-      become_method: su
-      # become_password: "{{ ansible_become_password }}"
   
     # - name: Get the primary IP address using hostname and awk
     #   shell: "hostname -I | awk '{print $1}'"
