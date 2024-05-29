@@ -3,7 +3,18 @@
   hosts: all
   become: yes
   ignore_unreachable: true
+  vars:
+    reg: "{{ reg }}"
+    user: "{{ user }}"
+    pass: "{{ pass }}"
+    
   tasks:
+    - name: Log in to Docker registry
+      docker_login:
+        registry: {{ reg }}
+        username: {{ user }}
+        password: {{ pass }}
+        
     - name: Pull Docker Image
       ansible.builtin.shell: |
         docker pull giggly/message_count:latest
