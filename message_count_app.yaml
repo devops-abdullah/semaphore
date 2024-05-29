@@ -4,9 +4,9 @@
   become: yes
   ignore_unreachable: true
   vars:
-    reg: "{{ reg }}"
-    user: "{{ user }}"
-    pass: "{{ pass }}"
+    reg: "{{ lookup('env', 'reg') }}"
+    user: "{{ lookup('env', 'user') }}"
+    pass: "{{ lookup('env', 'pass') }}"
     ansible_become: true
     ansible_become_method: sudo
     ansible_become_user: "{{ ansible_become_user }}"
