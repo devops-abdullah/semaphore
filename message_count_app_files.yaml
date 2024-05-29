@@ -10,14 +10,17 @@
     remote_password: "{{ lookup('env', 'second_remote_password') }}"
     
   tasks:
-    - name: Example task with sudo
-      command: whoami
-      become: true
-      become_user: "{{ ansible_become_user }}"
-      become_method: sudo
+    # - name: Example task with sudo
+    #   command: whoami
+    #   become: true
+    #   become_user: "{{ ansible_become_user }}"
+    #   become_method: sudo
       
     - name: Get the first network interface IP address
       ansible.builtin.command: hostname -I | awk '{print $1}'
+      become: true
+      become_user: "{{ ansible_become_user }}"
+      become_method: sudo
       register: first_interface_ip
 
     #- name: Append IP address to the start of each file
