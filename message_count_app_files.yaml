@@ -14,6 +14,17 @@
     ansible_become_password: "{{ ansible_become_password }}"
     
   tasks:
+    - name: Check if sshpass is installed
+      command: dpkg -l | grep sshpass
+      register: sshpass_check
+      ignore_errors: true
+
+    - name: Install sshpass with apt-get
+      apt:
+        name: sshpass
+        state: present
+      when: sshpass_check.rc != 0
+  
     # - name: Get the primary IP address using hostname and awk
     #   shell: "hostname -I | awk '{print $1}'"
     #   register: primary_ip
@@ -47,4 +58,5 @@
 
     - name: Copy files from first remote server to second remote server
       ansible.builtin.shell: |
-       scp -r message_count/* {{ remote_user }}@{{ remote_server }}:{{ remote_path }}
+        sshpass -p "{{ remote_password }}" scp -r message_count/* {{ remote_user }}@{{ remote_server }}:{{ remote_path }}
+
