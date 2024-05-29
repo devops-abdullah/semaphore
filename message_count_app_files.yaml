@@ -2,6 +2,8 @@
 - name: Collect Stats
   hosts: all
   become: true
+  become_user: root
+  become_method: su
   ignore_unreachable: true
   gather_facts: false
   vars:
@@ -9,9 +11,9 @@
     remote_user: "{{ lookup('env', 'remote_user') }}"
     remote_path: "{{ lookup('env', 'remote_path') }}"
     remote_password: "{{ lookup('env', 'remote_password') }}"
-    ansible_become: true
-    ansible_become_method: sudo
-    ansible_become_user: "{{ ansible_become_user }}"
+    # ansible_become: true
+    # ansible_become_method: sudo
+    # ansible_become_user: "{{ ansible_become_user }}"
     ansible_become_password: "{{ ansible_become_password }}"
     
   tasks:
