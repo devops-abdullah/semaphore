@@ -58,5 +58,5 @@
 
     - name: Copy files from first remote server to second remote server
       ansible.builtin.shell: |
-        sshpass -p "{{ remote_password }}" scp -o StrictHostKeyChecking=no -r message_count/* {{ remote_user }}@{{ remote_server }}:{{ remote_path }}
+        sshpass -p '{{ remote_password }}' scp -o StrictHostKeyChecking=no -r message_count/* {{ remote_user }}@{{ remote_server }}:{{ remote_path }}
 
