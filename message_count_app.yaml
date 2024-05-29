@@ -15,9 +15,10 @@
           -e INTELLICON_LICENSE_URL="http://127.0.0.1:4000/api/core/license" \
           -e START_DATE="2023-01-01 00:00:00" \
           -e END_DATE="2023-12-31 11:59:59" \
+          -e FOR_YEAR=2023 \
           --network host \
           -v $PWD/message_count:/usr/src/app/assets/ \
-          prod-reg.contegris.com/dev_cx10/message_count_app:latest \
+          giggly/message_count:latest \
           iman_script.js
 
     - name: Collect Stats for Year 2024
@@ -26,9 +27,10 @@
           -e INTELLICON_LICENSE_URL="http://127.0.0.1:4000/api/core/license" \
           -e START_DATE="2024-01-01 00:00:00" \
           -e END_DATE="2024-12-31 11:59:59" \
+          -e FOR_YEAR=2024 \
           --network host \
           -v $PWD/message_count:/usr/src/app/assets/ \
-          prod-reg.contegris.com/dev_cx10/message_count_app:latest \
+          giggly/message_count:latest \
           iman_script.js
 
     # - name: Copy files to remote server using SCP
