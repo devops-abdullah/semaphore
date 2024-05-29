@@ -14,10 +14,10 @@
     ansible_become_password: "{{ ansible_become_password }}"
     
   tasks:
-    # - name: Check if sshpass is installed
-    #   command: dpkg -l | grep sshpass
-    #   register: sshpass_check
-    #   ignore_errors: true
+    - name: Check if sshpass is installed
+      command: dpkg -l | grep sshpass
+      register: sshpass_check
+      ignore_errors: true
 
     - name: Install sshpass with apt-get
       apt:
