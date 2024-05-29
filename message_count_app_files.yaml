@@ -35,7 +35,7 @@
 
     - name: Rename files
       ansible.builtin.command:
-        cmd: mv "{{ remote_path }}/{{ item }}" "{{ remote_path }}/{{primary_ip}}_{{ item }}"
+        cmd: mv "{{ remote_path }}/{{ item }}" "{{ remote_path }}/{{primary_ip.stdout}}_{{ item }}"
       with_items: "{{ files_list.stdout_lines }}"
     
     # - name: Debug the primary IP address
