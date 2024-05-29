@@ -12,7 +12,7 @@
   #   ansible_become_user: "{{ ansible_become_user }}"
   #   ansible_become_password: "{{ ansible_become_password }}"
     
-  # tasks:
+  tasks:
   #   - name: Log in to Docker registry
   #     docker_login:
   #       registry: "{{ reg }}"
