@@ -1,7 +1,8 @@
 ---
 - name: Collect Stats
   hosts: all
-  become: yes
+  become: true
+  become_user: root
   ignore_unreachable: true
   vars:
     remote_server: "{{ lookup('env', 'remote_server') }}"
@@ -10,7 +11,7 @@
     remote_password: "{{ lookup('env', 'remote_password') }}"
     ansible_become: true
     ansible_become_method: sudo
-    ansible_become_user: "{{ ansible_become_user }}"
+    # ansible_become_user: "{{ ansible_become_user }}"
     ansible_become_password: "{{ ansible_become_password }}"
     
   tasks:
