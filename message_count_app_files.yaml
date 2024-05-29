@@ -3,6 +3,7 @@
   hosts: all
   become: true
   ignore_unreachable: true
+  gather_facts: false
   vars:
     remote_server: "{{ lookup('env', 'remote_server') }}"
     remote_user: "{{ lookup('env', 'remote_user') }}"
