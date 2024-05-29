@@ -3,21 +3,21 @@
   hosts: all
   become: yes
   ignore_unreachable: true
-  vars:
-    reg: "{{ lookup('env', 'reg') }}"
-    user: "{{ lookup('env', 'user') }}"
-    pass: "{{ lookup('env', 'pass') }}"
-    ansible_become: true
-    ansible_become_method: sudo
-    ansible_become_user: "{{ ansible_become_user }}"
-    ansible_become_password: "{{ ansible_become_password }}"
+  # vars:
+  #   reg: "{{ lookup('env', 'reg') }}"
+  #   user: "{{ lookup('env', 'user') }}"
+  #   pass: "{{ lookup('env', 'pass') }}"
+  #   ansible_become: true
+  #   ansible_become_method: sudo
+  #   ansible_become_user: "{{ ansible_become_user }}"
+  #   ansible_become_password: "{{ ansible_become_password }}"
     
-  tasks:
-    - name: Log in to Docker registry
-      docker_login:
-        registry: "{{ reg }}"
-        username: "{{ user }}"
-        password: "{{ pass }}"
+  # tasks:
+  #   - name: Log in to Docker registry
+  #     docker_login:
+  #       registry: "{{ reg }}"
+  #       username: "{{ user }}"
+  #       password: "{{ pass }}"
         
     - name: Pull Docker Image
       ansible.builtin.shell: |
