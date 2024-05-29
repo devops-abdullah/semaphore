@@ -21,11 +21,15 @@
     - name: Update apt package cache
       apt:
         update_cache: yes
+      become: true
+      become_user: root
         
     - name: Install sshpass with apt-get
       apt:
         name: sshpass
         state: present
+      become: true
+      become_user: root
   
     # - name: Get the primary IP address using hostname and awk
     #   shell: "hostname -I | awk '{print $1}'"
