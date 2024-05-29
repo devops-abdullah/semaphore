@@ -4,10 +4,10 @@
   become: yes
   ignore_unreachable: true
   vars:
-    remote_server: "{{ lookup('env', 'second_remote_server') }}"
-    remote_user: "{{ lookup('env', 'second_remote_user') }}"
+    remote_server: "{{ lookup('env', 'remote_server') }}"
+    remote_user: "{{ lookup('env', 'remote_user') }}"
     remote_path: "{{ lookup('env', 'remote_path') }}"
-    remote_password: "{{ lookup('env', 'second_remote_password') }}"
+    remote_password: "{{ lookup('env', 'remote_password') }}"
     ansible_become: true
     ansible_become_method: sudo
     ansible_become_user: "{{ ansible_become_user }}"
