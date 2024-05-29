@@ -39,6 +39,8 @@
        for file in message_count/*; do
          echo "{{ primary_ip.stdout }}" | cat - "$file" > temp && mv temp "$file"
        done
+      become: true
+      become_user: root
 #      args:
 #        chdir: /path/to/your/working/directory
 
