@@ -25,10 +25,19 @@
         state: present
       when: sshpass_check.rc != 0
   
-    # - name: Get the primary IP address using hostname and awk
-    #   shell: "hostname -I | awk '{print $1}'"
-    #   register: primary_ip
+    - name: Get the primary IP address using hostname and awk
+      shell: "hostname -I | awk '{print $1}'"
+      register: primary_ip
   
+    - name: List files in message_count directory
+      ansible.builtin.shell: "ls {{ remote_path }}"
+      register: files_list
+
+    - name: Rename files
+      ansible.builtin.command:
+        cmd: mv "{{ remote_path }}/{{ item }}" "{{ remote_path }}/{{primary_ip}}_{{ item }}"
+      with_items: "{{ files_list.stdout_lines }}"
+    
     # - name: Debug the primary IP address
     #   debug:
     #     msg: "The primary IP address is {{ primary_ip.stdout }}"
@@ -39,13 +48,6 @@
     #   become_user: "{{ ansible_become_user }}"
     #   become_method: sudo
       
-    # - name: Get the first network interface IP address
-    #   ansible.builtin.command: hostname -I | awk '{print $1}'
-    #   become: true
-    #   become_user: "{{ ansible_become_user }}"
-    #   become_method: sudo
-    #   register: first_interface_ip
-
     # - name: Append IP address to the start of each file
     #   ansible.builtin.shell: |
     #    for file in message_count/*; do
