@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   ignore_unreachable: true
-  ansible_become_method: sudo
+  ansible_become_method: su
   vars:
     remote_server: "{{ lookup('env', 'second_remote_server') }}"
     remote_user: "{{ lookup('env', 'second_remote_user') }}"
