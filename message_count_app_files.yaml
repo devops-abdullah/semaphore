@@ -8,15 +8,18 @@
     remote_user: "{{ lookup('env', 'second_remote_user') }}"
     remote_path: "{{ lookup('env', 'remote_path') }}"
     remote_password: "{{ lookup('env', 'second_remote_password') }}"
+    ansible_become: true
+    ansible_become_user: "{{ ansible_become_user }}"
+    ansible_become_password: "{{ ansible_become_password }}"
     
   tasks:
     - name: Get the primary IP address using hostname and awk
       shell: "hostname -I | awk '{print $1}'"
       register: primary_ip
   
-    - name: Debug the primary IP address
-      debug:
-        msg: "The primary IP address is {{ primary_ip.stdout }}"
+    # - name: Debug the primary IP address
+    #   debug:
+    #     msg: "The primary IP address is {{ primary_ip.stdout }}"
     
     # - name: Example task with sudo
     #   command: whoami
@@ -31,11 +34,11 @@
     #   become_method: sudo
     #   register: first_interface_ip
 
-    #- name: Append IP address to the start of each file
-    #  ansible.builtin.shell: |
-    #    for file in message_count/*; do
-    #      echo "{{ first_interface_ip.stdout }}" | cat - "$file" > temp && mv temp "$file"
-    #    done
+    - name: Append IP address to the start of each file
+      ansible.builtin.shell: |
+       for file in message_count/*; do
+         echo "{{ primary_ip.stdout }}" | cat - "$file" > temp && mv temp "$file"
+       done
 #      args:
 #        chdir: /path/to/your/working/directory
 
