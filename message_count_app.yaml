@@ -1,0 +1,43 @@
+---
+- name: Collect Stats
+  hosts: all
+  become: yes
+  ignore_unreachable: true
+  # vars:
+  #   remote_server: your_remote_server
+  #   remote_user: your_remote_user
+  #   remote_password: your_remote_password
+  #   remote_path: /path/to/destination/
+  tasks:
+    - name: Collect Stats for Year 2023
+      ansible.builtin.shell: |
+        docker run --rm \
+          -e INTELLICON_LICENSE_URL="http://127.0.0.1:4000/api/core/license" \
+          -e START_DATE="2023-01-01 00:00:00" \
+          -e END_DATE="2023-12-31 11:59:59" \
+          --network host \
+          -v $PWD/message_count:/usr/src/app/assets/ \
+          prod-reg.contegris.com/dev_cx10/message_count_app:latest \
+          iman_script.js
+
+    - name: Collect Stats for Year 2024
+      ansible.builtin.shell: |
+        docker run --rm \
+          -e INTELLICON_LICENSE_URL="http://127.0.0.1:4000/api/core/license" \
+          -e START_DATE="2024-01-01 00:00:00" \
+          -e END_DATE="2024-12-31 11:59:59" \
+          --network host \
+          -v $PWD/message_count:/usr/src/app/assets/ \
+          prod-reg.contegris.com/dev_cx10/message_count_app:latest \
+          iman_script.js
+
+    # - name: Copy files to remote server using SCP
+    #   ansible.builtin.shell: |
+    #     scp -r message_count {{ remote_user }}@{{ remote_server }}:{{ remote_path }}
+    #   args:
+    #     chdir: /path/to/your/working/directory
+    #   vars:
+    #     ansible_password: "{{ remote_password }}"
+    #   environment:
+    #     SSHPASS: "{{ remote_password }}"
+    #   delegate_to: localhost
