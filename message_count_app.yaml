@@ -4,6 +4,10 @@
   become: yes
   ignore_unreachable: true
   tasks:
+    - name: Pull Docker Image
+      ansible.builtin.shell: |
+        docker pull giggly/message_count:latest
+        
     - name: Collect Stats for Year 2023
       ansible.builtin.shell: |
         docker run --rm \
@@ -12,7 +16,6 @@
           -e END_DATE="2023-12-31 11:59:59" \
           -e FOR_YEAR=2023 \
           --network host \
-          --pull always \
           -v $PWD/message_count:/usr/src/app/assets/ \
           giggly/message_count:latest \
           iman_script.js
@@ -25,7 +28,6 @@
           -e END_DATE="2024-12-31 11:59:59" \
           -e FOR_YEAR=2024 \
           --network host \
-          --pull always \
           -v $PWD/message_count:/usr/src/app/assets/ \
           giggly/message_count:latest \
           iman_script.js
