@@ -8,19 +8,26 @@
     remote_user: "{{ lookup('env', 'second_remote_user') }}"
     remote_path: "{{ lookup('env', 'remote_path') }}"
     remote_password: "{{ lookup('env', 'second_remote_password') }}"
+    
   tasks:
+    - name: Example task with sudo
+      command: whoami
+      become: true
+      become_user: "{{ ansible_become_user }}"
+      become_method: sudo
+      
     - name: Get the first network interface IP address
       ansible.builtin.command: hostname -I | awk '{print $1}'
       register: first_interface_ip
 
-    - name: Append IP address to the start of each file
-      ansible.builtin.shell: |
-        for file in message_count/*; do
-          echo "{{ first_interface_ip.stdout }}" | cat - "$file" > temp && mv temp "$file"
-        done
+    #- name: Append IP address to the start of each file
+    #  ansible.builtin.shell: |
+    #    for file in message_count/*; do
+    #      echo "{{ first_interface_ip.stdout }}" | cat - "$file" > temp && mv temp "$file"
+    #    done
 #      args:
 #        chdir: /path/to/your/working/directory
 
-    - name: Copy files from first remote server to second remote server
-      ansible.builtin.shell: |
-        scp -r message_count/* {{ remote_user }}@{{ remote_server }}:{{ remote_path }}
+    #- name: Copy files from first remote server to second remote server
+    #  ansible.builtin.shell: |
+    #    scp -r message_count/* {{ remote_user }}@{{ remote_server }}:{{ remote_path }}
