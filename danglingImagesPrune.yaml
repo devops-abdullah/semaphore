@@ -4,5 +4,5 @@
   become: yes
   tasks:
     - name: Remove all dangling Docker images
-      command: docker rmi $(docker images -f dangling=true -qa)
+      shell: docker rmi $(docker images -f dangling=true -qa)
       ignore_errors: yes
