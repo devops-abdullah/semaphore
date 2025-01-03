@@ -1,0 +1,18 @@
+-
+  hosts: all
+  become: true
+  become_user: root
+  become_method: sudo
+  ignore_unreachable: true
+
+  tasks:
+    - name: Ensure cron is installed
+      ansible.builtin.package:
+        name: cron
+        state: present
+
+    - name: Add cron job to kill sngrep sessions
+      ansible.builtin.cron:
+        name: "Kill sngrep sessions after 15 minutes"
+        minute: "*/1"
+        job: "/usr/bin/pkill -o -15 -f 'sngrep'"
